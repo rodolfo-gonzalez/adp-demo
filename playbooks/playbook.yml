@@ -1,0 +1,13 @@
+- hosts: tag_Name_application
+  user: root
+  vars_files:
+    - "../vars/vars.yml"
+  roles:
+    - role: HDCXI-CryptoService
+      salt: true
+    - role: iptables
+      rules:
+        input:
+          - "{{ crypto_service_config.app_config.salt.portEn }}"
+          - "{{ crypto_service_config.app_config.salt.portDe }}"
+      tags: firewall
