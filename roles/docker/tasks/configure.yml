@@ -12,4 +12,4 @@
   shell: "docker build -f /tmp/Dockerfile -t demo ."
 
 - name: Run container (detached)
-  shell: " docker run -p 8080:8080 -t demo -d"
+  shell: "docker run -p 8080:8080 -t demo -d"
