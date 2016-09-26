@@ -24,11 +24,16 @@
     profile: "{{ aws.profile }}"
     rules:
       - proto: all
-        cidr_ip: 10.0.0.0/8
+        cidr_ip:
+          - 10.0.0.0/8
       - proto: tcp
         from_port: 22
         to_port: 22
         cidr_ip: 200.52.87.202/32
+      - proto: tcp
+        from_port: 8080
+        to_port: 8080
+        group_id: "{{ sg_elb_out.group_id }}"
     rules_egress:
       - proto: all
         cidr_ip: 0.0.0.0/0
