@@ -14,15 +14,15 @@
     instance_type: t2.micro
     image: ami-775e4f16
     key_name: Demo
-    #vpc_subnet_id: "{{ item.id }}"
-    vpc_subnet_id: subnet-729ba416
+    vpc_subnet_id: "{{ item.id }}"
+    #vpc_subnet_id: subnet-729ba416
     monitoring: yes
     wait: yes
     instance_tags:
       Environment: Demo
       Name: web app
-    count_tag:
-      Name: web app
-    exact_count: 1
-  #with_items: "{{ vpc_out.subnets }}"
+  with_items: "{{ vpc_out.subnets }}"
   register: ec2_out
+
+- name: Refresh inventory
+  meta: refresh_inventory
