@@ -26,10 +26,12 @@
       - proto: all
         cidr_ip:
           - 10.0.0.0/8
+          - 200.52.87.202/32
       - proto: tcp
         from_port: 22
         to_port: 22
-        cidr_ip: 200.52.87.202/32
+        cidr_ip:
+          - 200.52.87.202/32
       - proto: tcp
         from_port: 8080
         to_port: 8080
