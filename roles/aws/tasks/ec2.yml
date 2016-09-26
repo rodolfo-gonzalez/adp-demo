@@ -10,7 +10,7 @@
     profile: "{{ aws.profile }}"
     assign_public_ip: yes
     region: "{{ vpc.region }}"
-    group: "EC2 restricted sg"
+    group: EC2 restricted sg
     instance_type: c4.large
     image: ami-2051294a
     vpc_subnet_id: "{{ item.id }}"
@@ -18,8 +18,8 @@
     wait: yes
     instance_tags:
       Environment: Demo
-      Name: "web app"
-    count_tag: "web app"
+      Name: web app
+    count_tag: web app
     exact_count: 1
   with_items: "{{ vpc_out.subnets }}"
-  register: ec2_out  
+  register: ec2_out

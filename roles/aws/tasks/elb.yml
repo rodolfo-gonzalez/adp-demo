@@ -1,0 +1,17 @@
+- name: Create ELB
+  ec2_elb_lb:
+    profile: "{{ aws.profile }}"
+    name: ELB 8080
+    state: present
+    region: "{{ aws.region }}"
+    subnets: "{{ vpc_out.subnets }}"
+    security_group_names: ELB pub 8080
+    listeners:
+      - protocol: http
+        load_balancer_port: 8080
+        instance_protocol: http
+        instance_port: 8080
+
+
+
+- name: Add ec2 intsances to ELB

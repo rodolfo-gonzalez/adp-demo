@@ -1,6 +1,6 @@
 - name: ELB security group
   ec2_group:
-    name: "ELB pub 8080"
+    name: ELB pub 8080
     vpc_id: "{{ vpc_out.get_id_from_this_var | vpc_facts.get_id_from_this_var }}"
     region: "{{ aws.region }}"
     profile: "{{ aws.profile }}"
@@ -15,7 +15,7 @@
 
 - name: EC2 security group
   ec2_group:
-    name: "EC2 restricted sg"
+    name: EC2 restricted sg
     vpc_id: "{{ vpc_out.get_id_from_this_var | vpc_facts.get_id_from_this_var }}"
     region: "{{ aws.region }}"
     profile: "{{ aws.profile }}"
