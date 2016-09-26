@@ -1,0 +1,35 @@
+ec2_vpc:
+  profile: "{{ aws.profile }}"
+  state: present
+  wait: yes
+  cidr_block: 192.168.0.0/16
+  resource_tags: { "Environment":"Demo" }
+  subnets:
+    - cidr: 192.168.1.0/24
+      az: "{{ aws.region ~ 'a' }}"
+      resource_tags: { "Environment":"Demo" }
+    - cidr: 192.168.2.0/24
+      az: "{{ aws.region ~ 'b' }}"
+      resource_tags: { "Environment":"Demo" }
+    - cidr: 192.168.3.0/24
+      az: "{{ aws.region ~ 'c' }}"
+      resource_tags: { "Environment":"Demo" }
+  internet_gateway: yes
+  dns_support: yes
+  dns_hostnames: yes
+  route_tables:
+    - subnets:
+        - 192.168.2.1/24
+        - 192.168.2.0/24
+        - 192.168.3.0/24
+      routes:
+        - dest: 0.0.0.0/0
+          gw: igw
+  region: "{{ aws.region }}"
+  register: vpc_out
+
+#- name: Get vpc facts
+#  ec2_vpc_subnet_facts:
+#  filters:
+#    "tag:Environment": Demo
+#  register: vpc_facts
