@@ -2,17 +2,16 @@
   set_fact:
     subnets_ids: "{{ vpc_out.subnets | map(attribute='id') | list }}"
 
-- debug: var=subnets_ids
-
 - name: Create ELB
   ec2_elb_lb:
     profile: "{{ aws.profile }}"
-    name: ELB 8080
+    name: ELB-8080
     state: present
     region: "{{ aws.region }}"
     subnets: "{{ subnets_ids }}"
     security_group_names:
-      - ELB pub 8080
+      - "ELB pub 8080"
+    cross_az_load_balancing: yes
     listeners:
       - protocol: http
         load_balancer_port: 8080
