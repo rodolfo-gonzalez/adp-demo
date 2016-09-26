@@ -1,7 +1,10 @@
 ---
 # tasks file for roles/docker
+- include: requirements.yml
+  tags: requirements_install
+
 - include: install.yml
   tags: docker_install
-  
+
 - include: configure.yml
   tags: docker_configure

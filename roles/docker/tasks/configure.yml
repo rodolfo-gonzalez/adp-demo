@@ -1,15 +1,25 @@
 - name: Ensure Dockerfile is present
   copy:
     src="Dockerfile"
-    dest="/tmp/Dockerfile"
+    dest="/home/ec2-user/Dockerfile"
+    owner=ec2-user
 
 - name: Ensure spring boot jar is present
   copy:
     src="gs-spring-boot-docker-0.1.0.jar"
-    dest="/tmp/gs-spring-boot-docker-0.1.0.jar"
+    dest="/home/ec2-user/gs-spring-boot-docker-0.1.0.jar"
+    owner=ec2-user
 
 - name: Build Docker Image
-  shell: "docker build -f /tmp/Dockerfile -t demo ."
+  docker_image:
+    name: demo
+    state: present
+    path: /home/ec2-user/
 
 - name: Run container (detached)
-  shell: "docker run -p 8080:8080 -t demo -d"
+  docker_container:
+    name: Demo
+    image: demo
+    state: started
+    published_ports: 8080:8080
+#  shell: "sudo docker run -p 8080:8080 -t demo -d"

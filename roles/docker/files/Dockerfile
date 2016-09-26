@@ -18,6 +18,6 @@ EXPOSE 8080
 
 #install Spring Boot artifact
 VOLUME /tmp
-COPY /tmp/gs-spring-boot-docker-0.1.0.jar gs-spring-boot-docker-0.1.0.jar
+COPY ./gs-spring-boot-docker-0.1.0.jar gs-spring-boot-docker-0.1.0.jar
 RUN sh -c 'touch /gs-spring-boot-docker-0.1.0.jar'
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/gs-spring-boot-docker-0.1.0.jar"]

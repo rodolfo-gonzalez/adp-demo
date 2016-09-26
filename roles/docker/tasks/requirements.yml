@@ -1,0 +1,17 @@
+- name: Download Epel repository
+  get_url:
+    url: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    dest: /tmp/epel-release-latest-7.noarch.rpm
+
+- name: Add Epel repository
+  yum:
+    name: /tmp/epel-release-latest-7.noarch.rpm
+    state: present
+
+- name: Install python pip
+  pip:
+    name='docker-py==1.9.0'
+    state=present
+
+- name: Install docker-py
+  pip: name=docker-py
