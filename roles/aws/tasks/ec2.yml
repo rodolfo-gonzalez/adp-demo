@@ -5,21 +5,24 @@
     region: "{{ aws.region }}"
     key_material: "{{ aws.ssh_public_key_file }}"
 
-- name: Create instances
+- name: Create instances (c4.large)
   ec2:
     profile: "{{ aws.profile }}"
     assign_public_ip: yes
-    region: "{{ vpc.region }}"
+    region: "{{ aws.region }}"
     group: EC2 restricted sg
-    instance_type: c4.large
-    image: ami-2051294a
-    vpc_subnet_id: "{{ item.id }}"
+    instance_type: t2.micro
+    image: ami-775e4f16
+    key_name: Demo
+    #vpc_subnet_id: "{{ item.id }}"
+    vpc_subnet_id: subnet-729ba416
     monitoring: yes
     wait: yes
     instance_tags:
       Environment: Demo
       Name: web app
-    count_tag: web app
+    count_tag:
+      Name: web app
     exact_count: 1
-  with_items: "{{ vpc_out.subnets }}"
+  #with_items: "{{ vpc_out.subnets }}"
   register: ec2_out

@@ -1,7 +1,8 @@
 - name: ELB security group
   ec2_group:
     name: ELB pub 8080
-    vpc_id: "{{ vpc_out.get_id_from_this_var | vpc_facts.get_id_from_this_var }}"
+    description: Public 8080
+    vpc_id: "{{ vpc_out.vpc_id }}"
     region: "{{ aws.region }}"
     profile: "{{ aws.profile }}"
     rules:
@@ -12,16 +13,23 @@
     rules_egress:
       - proto: all
         cidr_ip: 0.0.0.0/0
+  register: sg_elb_out
 
 - name: EC2 security group
   ec2_group:
     name: EC2 restricted sg
-    vpc_id: "{{ vpc_out.get_id_from_this_var | vpc_facts.get_id_from_this_var }}"
+    description: Resticted access
+    vpc_id: "{{ vpc_out.vpc_id }}"
     region: "{{ aws.region }}"
     profile: "{{ aws.profile }}"
     rules:
       - proto: all
         cidr_ip: 10.0.0.0/8
+      - proto: tcp
+        from_port: 22
+        to_port: 22
+        cidr_ip: 200.52.87.202/32
     rules_egress:
       - proto: all
         cidr_ip: 0.0.0.0/0
+  register: sg_ec2_out
