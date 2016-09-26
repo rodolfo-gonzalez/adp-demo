@@ -9,9 +9,9 @@
     state: present
 
 - name: Install python pip
-  pip:
-    name='docker-py==1.9.0'
+  yum:
+    name='python-pip'
     state=present
 
 - name: Install docker-py
-  pip: name=docker-py
+  pip: name='docker-py==1.9.0'
