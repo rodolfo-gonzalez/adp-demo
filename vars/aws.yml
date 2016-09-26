@@ -1,3 +1,4 @@
 aws:
   region: us-west-2
   profile: demo-profile
+  ssh_public_key_file: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
