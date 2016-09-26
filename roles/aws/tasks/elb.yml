@@ -17,3 +17,11 @@
         load_balancer_port: 8080
         instance_protocol: http
         instance_port: 8080
+    health_check:
+      ping_protocol: http
+      ping_port: 8080
+      ping_path: "/"
+      response_timeout: 5
+      interval: 30
+      unhealthy_threshold: 10
+      healthy_threshold: 10
