@@ -1,2 +1,6 @@
 ---
 # tasks file for roles/aws
+- include: vpc.yml
+- include: groups.yml
+- include: ec2.yml
+- include: elb.yml
