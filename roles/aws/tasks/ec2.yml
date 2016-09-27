@@ -21,6 +21,9 @@
     instance_tags:
       Environment: Demo
       Name: web app
+    count_tag:
+      Name: web app
+    exact_count: 3
   with_items: "{{ vpc_out.subnets }}"
   register: ec2_out
 
