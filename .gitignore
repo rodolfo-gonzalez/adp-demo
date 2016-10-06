@@ -1,1 +1,3 @@
 .retry/*.retry
+.kitchen/
+.kitchen.local.yml

@@ -1,0 +1,31 @@
+---
+driver:
+  name: docker
+
+platforms:
+  - name: centos-7
+    driver_config:
+      image: "centos/systemd"
+      provision_comman:
+        - yum install initscripts
+        - yum install systemd
+
+provisioner:
+  name: ansible_playbook
+  hosts: test-kitchen
+  ansible_verbose: false
+  require_ansible_repo: false
+  require_ansible_omnibus: true
+  require_chef_busser: false
+
+verifier:
+  name: serverspec
+  bundle_path: '/usr/local/bin'
+  rspec_path: '/usr/local/bin'
+
+
+suites:
+  - name: docker
+    verifier:
+      patterns:
+        - roles/docker/test/integration/default/serverspec/default_spec.rb
