@@ -1,4 +1,8 @@
 - hosts:
-    - test-kitchen
+    - test-kitchen*
+  vars:
+    docker:
+      path: /home/kitchen
+      user: kitchen
   roles:
     - docker
