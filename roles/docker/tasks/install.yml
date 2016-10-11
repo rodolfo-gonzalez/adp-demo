@@ -18,3 +18,4 @@
     name="docker"
     state=started
     enabled=yes
+  when: "{{ 'test-kitchen-' not in ansible_hostname }}"
